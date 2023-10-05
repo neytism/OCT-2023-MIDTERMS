@@ -10,6 +10,7 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] private GameObject _explodingBulletPrefab;
     [SerializeField] private Transform firePoint;
 
+    private Bullet _currentWeaponType;
     private float shotsInterval;
     private Player _p;
 
@@ -28,25 +29,14 @@ public class PlayerShoot : MonoBehaviour
 
     private void Fire()
     {
+        if (GetWeaponType() == null) return;
+        
         if (shotsInterval <= 0)
         {
-            GameObject bullet;
-
-            if (_weaponType == WeaponTypes.normal)
-            {
-                bullet = ObjectPool.Instance.PoolObject(_normalBulletPrefab, firePoint.position);
-                bullet.SetActive(true);
-                if (bullet != null) bullet.GetComponent<NormalBullet>().ChangeDirection(firePoint.up);
-            }
-            else
-            {
-                bullet = ObjectPool.Instance.PoolObject(_explodingBulletPrefab, firePoint.position);
-                bullet.SetActive(true);
-                if (bullet != null) bullet.GetComponent<ExplodingBullet>().ChangeDirection(firePoint.up);
-            }
+            GameObject bullet = ObjectPool.Instance.PoolObject(GetWeaponType(), firePoint.position);
+            bullet.SetActive(true);
+            bullet.GetComponent<Bullet>().ChangeDirection(firePoint.up);
             
-            
-
             shotsInterval = 1f / _p.fireRate; // adds interval between shots,, calculated from fire rate
         }
         else
@@ -54,9 +44,21 @@ public class PlayerShoot : MonoBehaviour
             shotsInterval -= Time.deltaTime;
         }
     }
-    
+
+    private GameObject GetWeaponType()
+    {
+        return _weaponType switch
+        {
+            WeaponTypes.none => null,
+            WeaponTypes.normal => _normalBulletPrefab,
+            WeaponTypes.exploding => _explodingBulletPrefab,
+            _ => null
+        };
+    }
+
     public enum WeaponTypes
     {
+        none,
         normal,
         exploding,
     }

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7198154771529248212}
   - component: {fileID: 2995402264057646575}
+  - component: {fileID: 3280234257844776785}
   m_Layer: 0
   m_Name: design
   m_TagString: Untagged
@@ -84,6 +85,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &3280234257844776785
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618343482294138100}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 071187643192b454880c35115e92b844, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2602379813339963149
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,12 +230,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: 1.52
+  currentSize: 0
   healthBarHolder: {fileID: 6925753833373455334}
   healthBar: {fileID: 1666328408030066856}
   expPrefab: {fileID: 7657494774826838334}
   maxHealth: 50
   health: 0
   speed: 1
+  _anim: {fileID: 3280234257844776785}
   shotsInterval: 3
   _enemyBulletPrefab: {fileID: 5858790582981337434, guid: a41625a638854bc4183bcfa4accf4c20, type: 3}
   _fireRate: 0.75

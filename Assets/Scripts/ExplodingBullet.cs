@@ -50,8 +50,9 @@ public class ExplodingBullet : Bullet
         {
             if (Vector3.Distance(transform.position, target.transform.position) < target.size)
             {
+                if(!target.isAlive) return;
                 Explode();
-                target.GetComponent<Enemy>().DecreaseHealth();
+                target.DecreaseHealth();
             }
         }
     }
@@ -64,7 +65,7 @@ public class ExplodingBullet : Bullet
         {
             if (Vector3.Distance(transform.position, target.transform.position) < _explodeRadius)
             {
-                target.GetComponent<Enemy>().DecreaseHealth();
+                if(target.isAlive) target.DecreaseHealth();
             }
         }
         

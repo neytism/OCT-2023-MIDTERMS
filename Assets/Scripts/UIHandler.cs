@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIHandler : MonoBehaviour
@@ -31,5 +32,12 @@ public class UIHandler : MonoBehaviour
     private void UpdateHealthCount(int value)
     {
         healthText.text = value.ToString();
+    }
+    
+    public void Restart()
+    {
+        Time.timeScale = 1f;
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.name);
     }
 }

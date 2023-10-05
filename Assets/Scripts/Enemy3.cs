@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Enemy3 : Enemy
 {
+    [SerializeField] private Animator _anim;
     [SerializeField] private float shotsInterval;
     [SerializeField] private GameObject _enemyBulletPrefab;
     [SerializeField] private float _fireRate = 1f;
@@ -21,6 +22,8 @@ public class Enemy3 : Enemy
     {
         
         health = maxHealth;
+        isAlive = true;
+        _anim.SetBool("IsDead", !isAlive);
         
         UpdateHealthBar((float)health, (float)maxHealth);
     }
@@ -34,6 +37,8 @@ public class Enemy3 : Enemy
 
     public override void Move()
     {
+        if (!isAlive) return;
+        
         Vector2 direction = (_player.position - transform.position).normalized;
 
         if (Distance(transform.position, _player.position) > _minDistance)
@@ -83,7 +88,8 @@ public class Enemy3 : Enemy
     public override void Die()
     {
         Drop();
-        gameObject.SetActive(false);
+        isAlive = false;
+        StartCoroutine(DeathSequence());
     }
 
     public override void Drop()
@@ -106,5 +112,12 @@ public class Enemy3 : Enemy
         return Mathf.Sqrt(Mathf.Pow((xDifference), 2) + Mathf.Pow((yDifference), 2) + Mathf.Pow((zDifference), 2));
     }
     
+    IEnumerator DeathSequence()
+    {
+        healthBarHolder.SetActive(false);
+        _anim.SetBool("IsDead", !isAlive);
+        yield return new WaitForSeconds(1f);
+        gameObject.SetActive(false);
+    }
     
 }

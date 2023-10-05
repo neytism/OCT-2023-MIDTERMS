@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
+    [SerializeField] private GameObject gameOverPanel;
     public static event Action<int> UpdateHealthCount;
     private Player _p;
 
@@ -28,7 +29,8 @@ public class PlayerHealth : MonoBehaviour
         {
             if (Vector3.Distance(transform.position, target.transform.position) < _p.range)
             {
-                target.GetComponent<Enemy>().Die();
+                if (!target.isAlive) return;
+                target.DecreaseHealth();
                 DecreaseHealth();
                 
             }
@@ -41,7 +43,9 @@ public class PlayerHealth : MonoBehaviour
 
         if (_p.health <= 0)
         {
+            _p.health = 0;
             Time.timeScale = 0f;
+            gameOverPanel.SetActive(true);
         }
 
         UpdateHeathUI();

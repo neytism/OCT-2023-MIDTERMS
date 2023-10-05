@@ -16,7 +16,7 @@ public class EnemySpawn : MonoBehaviour
 
     private int numberOfSpawned = 0;
     
-    private float spawnInterval = 1.5f; 
+    private float spawnInterval = 3f; 
     private int waveNumber = 1;
     
     
@@ -39,9 +39,9 @@ public class EnemySpawn : MonoBehaviour
         yield return new WaitForSeconds(60);
         StopCoroutine(SpawnBatch(spawnInterval, _enemy1));
         
-        StartCoroutine(SpawnBatch(spawnInterval * 1.25f, _enemy2));
+        StartCoroutine(SpawnBatch(spawnInterval * 3, _enemy2));
         yield return new WaitForSeconds(60);
-        StopCoroutine(SpawnBatch(spawnInterval * 1.25f, _enemy2));
+        StopCoroutine(SpawnBatch(spawnInterval * 3, _enemy2));
         
         StartCoroutine(SpawnBatch(spawnInterval,_enemy1, _enemy2));
         yield return new WaitForSeconds(60);
@@ -123,6 +123,7 @@ public class EnemySpawn : MonoBehaviour
     void IncreaseDifficulty()
     {
         waveNumber++;
-        spawnInterval *= Mathf.Log(waveNumber, 2);
+        //spawnInterval *= Mathf.Log(waveNumber, 2);
+        spawnInterval /= Mathf.Log(waveNumber, 2);
     }
 }

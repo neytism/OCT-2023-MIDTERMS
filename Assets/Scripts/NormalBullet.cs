@@ -45,8 +45,9 @@ public class NormalBullet : Bullet
         {
             if (Vector3.Distance(transform.position, target.transform.position) < target.size)
             {
+                if(!target.isAlive) return;
                 DisableBullet();
-                target.GetComponent<Enemy>().DecreaseHealth();
+                target.DecreaseHealth();
             }
         }
     }

@@ -5,9 +5,13 @@ using UnityEngine;
 
 public class Enemy1 : Enemy
 {
+    [SerializeField] private Animator _anim;
     private void OnEnable()
     {
         health = maxHealth;
+
+        isAlive = true;
+        _anim.SetBool("IsDead", !isAlive);
         
         UpdateHealthBar((float)health, (float)maxHealth);
     }
@@ -20,6 +24,7 @@ public class Enemy1 : Enemy
 
     public override void Move()
     {
+        if (!isAlive) return;
         Vector2 direction = (GetPlayerTransform().position - transform.position).normalized;
         
         transform.position += (Vector3)(direction * speed * Time.deltaTime);
@@ -48,7 +53,8 @@ public class Enemy1 : Enemy
     public override void Die()
     {
         Drop();
-        gameObject.SetActive(false);
+        isAlive = false;
+        StartCoroutine(DeathSequence());
     }
 
     public override void Drop()
@@ -60,5 +66,13 @@ public class Enemy1 : Enemy
     public override Transform GetPlayerTransform()
     {
         return FindObjectOfType<PlayerMovement>().transform;
+    }
+
+    IEnumerator DeathSequence()
+    {
+        healthBarHolder.SetActive(false);
+        _anim.SetBool("IsDead", !isAlive);
+        yield return new WaitForSeconds(1f);
+        gameObject.SetActive(false);
     }
 }

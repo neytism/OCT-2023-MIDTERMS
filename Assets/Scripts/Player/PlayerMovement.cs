@@ -43,8 +43,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
-        float moveX = transform.position.x + Input.GetAxisRaw("Horizontal") * _p.speed * Time.deltaTime;
-        float moveY = transform.position.y + Input.GetAxisRaw("Vertical") * _p.speed * Time.deltaTime;
+        Vector3 direction = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0f).normalized;
+        float moveX = transform.position.x + direction.x * _p.speed * Time.deltaTime;
+        float moveY = transform.position.y + direction.y * _p.speed * Time.deltaTime;
 
         transform.position = new Vector3(moveX, moveY, transform.position.z);
     }
