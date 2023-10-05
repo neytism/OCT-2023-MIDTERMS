@@ -432,13 +432,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: 0.57
-  currentSize: 0
+  isAlive: 0
   healthBarHolder: {fileID: 6925753833373455334}
   healthBar: {fileID: 1666328408030066856}
   expPrefab: {fileID: 9041577363075674625, guid: 11f64e867a1c2764287f04c2a2fbc698, type: 3}
   maxHealth: 8
   health: 0
   speed: 2
+  spriteRenderer: {fileID: 4818725831637305298}
+  colorHurt: {r: 1, g: 0, b: 0, a: 1}
+  colorNormal: {r: 1, g: 1, b: 1, a: 1}
   _anim: {fileID: 9117935944771990185}
   shotsInterval: 3
   firePoint: {fileID: 5594580640652965275}

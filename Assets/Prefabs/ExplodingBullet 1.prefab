@@ -214,5 +214,7 @@ MonoBehaviour:
   enableDebug: 0
   _speed: 3
   _maxDistance: 2
+  _explodeRadius: 2
+  _explodeDelay: 2
   _tr: {fileID: 725371892152881242}
-  _particle: {fileID: 1128191914061289642, guid: 899652fbcde6489499c886b95aeb0dfa, type: 3}
+  _particle: {fileID: 1128191914061289642, guid: 15bf09a602dc0574cbb946ebc9f575dd, type: 3}

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour
 {
-    [SerializeField] private WeaponTypes _weaponType;
+    public WeaponTypes weaponType;
     [SerializeField] private GameObject _normalBulletPrefab;
     [SerializeField] private GameObject _explodingBulletPrefab;
     [SerializeField] private Transform firePoint;
@@ -47,7 +47,7 @@ public class PlayerShoot : MonoBehaviour
 
     private GameObject GetWeaponType()
     {
-        return _weaponType switch
+        return weaponType switch
         {
             WeaponTypes.none => null,
             WeaponTypes.normal => _normalBulletPrefab,

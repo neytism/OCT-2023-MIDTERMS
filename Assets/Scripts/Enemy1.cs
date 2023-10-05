@@ -33,6 +33,7 @@ public class Enemy1 : Enemy
     public override void DecreaseHealth()
     {
         health--;
+        StartCoroutine(ColorTick());
         UpdateHealthBar( (float)health, (float)maxHealth);
 
         if (health <= 0)
